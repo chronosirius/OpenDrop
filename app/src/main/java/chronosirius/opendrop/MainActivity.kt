@@ -38,6 +38,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import chronosirius.opendrop.ui.theme.OpenDropTheme
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import android.text.format.Formatter
 
 @Composable
 fun KeepScreenOn() {
@@ -116,10 +117,10 @@ fun MainScreen() {
             ) {
                 Text("Files: ", fontSize = 24.sp, lineHeight = 32.sp)
                 LazyColumn(modifier = Modifier.fillMaxSize().padding(26.dp)) {
-                    items(state.files) {count ->
+                    for (file in state.files) {
                         Row {
                             Text(
-                                text = "$count",
+                                text = "${file.name} (${Formatter.formatFileSize(file.size)})",
                                 modifier = Modifier
                                     .padding(8.dp),
                                 color = Color.White
